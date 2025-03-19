@@ -31,7 +31,7 @@
     <option value="stacy_lightweight.glb">ㄕ黛西</option>
     <option value="2025_3_19.glb">毛毛宇</option>
   </select>
-
+  
   <script>
     // 初始化場景、攝影機與渲染器
     const scene = new THREE.Scene();
@@ -50,21 +50,22 @@
         scene.remove(currentModel);
       }
       // 請確認這裡的路徑是否正確（例如資料夾名稱、大小寫等）
-      loader.load("3DViewer/" + modelFile, function(glb) {
-        currentModel = glb.scene;
-        // 調整位置與比例，確保模型在攝影機視野內
-        currentModel.position.set(0, 0, 0);
-        currentModel.scale.set(1, 1, 1); // 根據需要進行調整
-        scene.add(currentModel);
-      }, undefined, function(error) {
-        console.error("載入模型時發生錯誤：", error);
-      });
-    }
+  loader.load("3DViewer/" + modelFile, function(glb) {
+    currentModel = glb.scene;
+    // Adjust position and scale to ensure the model is visible
+    currentModel.position.set(0, 0, 0);
+    currentModel.scale.set(1, 1, 1); // Adjust as necessary
+    scene.add(currentModel);
+  }, undefined, function(error) {
+    console.error("Error loading model:", error);
+  });
 
+    }
     // 預設載入 2025_3_19.glb 模型
     loadModel("2025_3_19.glb");
 
     // 監聽下拉選單，點選後載入對應模型
+
     const modelSelect = document.getElementById('modelSelect');
     modelSelect.addEventListener('change', function(event) {
       loadModel(event.target.value);
